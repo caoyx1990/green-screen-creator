@@ -27,8 +27,8 @@ export default defineNuxtConfig({
       },
       title: 'Green Screen Creator',
       link: [
-        { rel: 'canonical', href: 'https://green-screen-creator.vercel.app' },
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
+        { rel: 'canonical', href: 'https://green-screen-creator.com' },
+        { rel: 'icon', type: 'image/x-icon', href: '/green-svgrepo-com.svg' }
       ],
       meta: [
         { hid: 'charset', charset: 'utf-8' },
@@ -60,13 +60,13 @@ export default defineNuxtConfig({
           hid: 'og:url',
           name: 'og:url',
           property: 'og:url',
-          content: 'https://green-screen-creator.vercel.app'
+          content: 'https://green-screen-creator.com'
         },
         {
           hid: 'og:site_name',
           name: 'og:site_name',
           property: 'og:site_name',
-          content: 'green-screen-creator.vercel.app'
+          content: 'green-screen-creator.com'
         },
         {
           hid: 'og:title',
@@ -85,7 +85,7 @@ export default defineNuxtConfig({
           hid: 'og:image',
           name: 'og:image',
           property: 'og:image',
-          content: 'https://green-screen-creator.vercel.app/cover.jpg'
+          content: 'https://green-screen-creator.vercel.com/cover.jpg'
         },
         {
           name: 'twitter:card',
@@ -102,7 +102,7 @@ export default defineNuxtConfig({
         },
         {
           name: 'twitter:image',
-          content: 'https://green-screen-creator.vercel.app/cover.jpg'
+          content: 'https://green-screen-creator.com/cover.jpg'
         },
         {
           hid: 'msapplication-TileColor',
@@ -118,7 +118,7 @@ export default defineNuxtConfig({
         {
           hid: 'apple-mobile-web-app-title',
           name: 'apple-mobile-web-app-title',
-          content: 'green-screen-creator.vercel.app'
+          content: 'green-screen-creator.com'
         }
       ],
       script: [
