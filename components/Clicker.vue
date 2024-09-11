@@ -279,14 +279,51 @@ export default {
       this.$emit('submit', clicks)
     }
   },
+  // async mounted() {
+  //   this.mask_ctx = this.$refs.maskCanvas.getContext('2d')
+  //   this.model = await SamModel.from_pretrained(model_id, {
+  //     dtype: 'fp16', // or "fp32"
+  //     device: 'webgpu'
+  //   })
+  //   this.processor = await AutoProcessor.from_pretrained(model_id)
+  //   this.segment(this.image)
+  // }
+
   async mounted() {
     this.mask_ctx = this.$refs.maskCanvas.getContext('2d')
-    this.model = await SamModel.from_pretrained(model_id, {
-      dtype: 'fp16', // or "fp32"
-      device: 'webgpu'
-    })
-    this.processor = await AutoProcessor.from_pretrained(model_id)
-    this.segment(this.image)
+
+    let dtype = 'fp32'
+    let device = 'cpu'
+
+    // Check for WebGPU support
+    if ('gpu' in navigator) {
+      try {
+        const adapter = await navigator.gpu.requestAdapter()
+        if (adapter) {
+          const gpuDevice = await adapter.requestDevice()
+          const supportsFp16 = gpuDevice.features.has('shader-f16')
+
+          if (supportsFp16) {
+            dtype = 'fp16'
+          }
+          device = 'webgpu'
+        }
+      } catch (error) {
+        console.warn('WebGPU not fully supported:', error)
+      }
+    }
+
+    try {
+      this.model = await SamModel.from_pretrained(model_id, {
+        dtype,
+        device
+      })
+      this.processor = await AutoProcessor.from_pretrained(model_id)
+      this.segment(this.image)
+    } catch (error) {
+      console.error('Error initializing model:', error)
+      // Handle the error appropriately (e.g., show a user-friendly message)
+    }
   }
 }
 </script>

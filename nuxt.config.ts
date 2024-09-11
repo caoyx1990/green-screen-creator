@@ -124,14 +124,14 @@ export default defineNuxtConfig({
       script: [
         {
           async: true,
-          src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GTAG_ID}`
+          src: `https://www.googletagmanager.com/gtag/js?id=G-JSMXMWDWSP`
         },
         {
           children: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${process.env.GTAG_ID}');`
+            gtag('config', 'G-JSMXMWDWSP');`
         }
       ],
       bodyAttrs: {
