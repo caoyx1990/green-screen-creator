@@ -85,7 +85,7 @@ export default defineNuxtConfig({
           hid: 'og:image',
           name: 'og:image',
           property: 'og:image',
-          content: 'https://green-screen-creator.vercel.com/cover.jpg'
+          content: 'https://green-screen-creator.com/cover.jpg'
         },
         {
           name: 'twitter:card',

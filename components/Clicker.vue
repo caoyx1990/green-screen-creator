@@ -303,14 +303,25 @@ export default {
           const gpuDevice = await adapter.requestDevice()
           const supportsFp16 = gpuDevice.features.has('shader-f16')
 
-          if (supportsFp16) {
-            dtype = 'fp16'
-          }
-          device = 'webgpu'
+          const dtype = supportsFp16 ? 'fp16' : 'fp32';
+          const device = 'webgpu';
+
+          // Initialize the model with WebGPU
+          this.model = await SamModel.from_pretrained(model_id, {
+            dtype,
+            device
+          });
+          this.processor = await AutoProcessor.from_pretrained(model_id);
+          this.segment(this.image);
+        } else {
+          console.error('No WebGPU adapter found.');
         }
       } catch (error) {
-        console.warn('WebGPU not fully supported:', error)
+        console.error('Error initializing WebGPU:', error);
       }
+    } else {
+      console.error('WebGPU is not supported in this browser.');
+      // Optionally, inform the user that WebGPU is required
     }
 
     try {
